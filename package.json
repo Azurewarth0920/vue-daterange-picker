@@ -4,7 +4,7 @@
   "description": "Calendar UI component library of Vue.js 3 for picking date, week, month, year ranges, with zero dependencies and high customizability.",
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.1.4",
   "type": "module",
   "files": [
     "dist"

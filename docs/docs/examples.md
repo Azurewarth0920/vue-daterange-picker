@@ -80,7 +80,7 @@ Use v-model to bind start date and end date.
 
 #### Sample code
 
-```Vue
+```vue
 <script setup>
 import { ref } from 'vue'
 const start = ref(null)
@@ -94,50 +94,7 @@ const end = ref(null)
 </template>
 ```
 
-## 2. Attach Element
-
-You can pass the element you want to attach, to let the calendar attach to the element, and you can also assign the attach direction to the calendar.
-
-<span>Change the option to show calendar and assign direction.</span>
-
-<select v-model="attachDirection" ref="attachElement">
-  <option value="-">-</option>
-  <option value="top">top</option>
-  <option value="bottom">bottom</option>
-  <option value="left">left</option>
-  <option value="right">right</option>
-</select>
-<br>
-<range-calendar v-if="attachDirection !== '-'" :options="options" />
-<hr>
-
-#### Sample code
-```vue
-<script setup>
-import { ref, computed } from 'vue'
-
-const attachElement = ref(null)
-const attachDirection = ref('bottom')
-const options = computed(() => ({
-  attachElement,
-  attachDirection: attachDirection.value
-}))
-</script>
-
-<template>
-  <select v-model="attachDirection" ref="attachElement">
-    <option value="-" disabled>-</option>
-    <option value="top">top</option>
-    <option value="bottom">bottom</option>
-    <option value="left">left</option>
-    <option value="right">right</option>
-  </select>
-  <br>
-  <range-calendar v-if="attachDirection !== '-'" :options="options" />
-</template>
-```
-
-## 3. Type
+## 2. Type
 
 The default select type of calendar is **date**, you can also change the type to select week, month, year.
 
@@ -164,19 +121,70 @@ const yearEnd = ref(null)
 </template>
 ```
 
-### 3.1 Week select calendar
+
+### 2.1 Week select calendar
 <br>
 <range-calendar v-model:start="weekStart" v-model:end="weekEnd" :options="{type: 'week'}" />
 <hr>
 
-### 3.2 Month select calendar
+### 2.2 Month select calendar
 <br>
 <range-calendar v-model:start="monthStart" v-model:end="monthEnd" :options="{type: 'month'}" />
 <hr>
 
-### 3.3 Year select calendar
+### 2.3 Year select calendar
 <br>
 <range-calendar v-model:start="yearStart" v-model:end="yearEnd" :options="{type: 'year'}" />
+<hr>
+
+
+## 3. Attach Element / Attach Direction
+
+You can pass the element you want to attach, to let the calendar attach to the element, and you can also assign the attach direction to the calendar.
+
+<span>Change the option to show calendar and assign direction.</span>
+
+<div>
+  <span>Direction: </span>
+  <select style="padding: 5px; border-radius: 5px;" v-model="attachDirection" ref="attachElement">
+    <option value="-">None</option>
+    <option value="top">Top</option>
+    <option value="bottom">Bottom</option>
+    <option value="left">Left</option>
+    <option value="right">Right</option>
+  </select>
+</div>
+
+<br>
+  <range-calendar v-if="attachDirection !== '-'" :options="options" />
+<hr>
+
+#### Sample code
+
+```vue
+<script setup>
+import { ref, computed } from 'vue'
+
+const attachElement = ref(null)
+const attachDirection = ref('-')
+const options = computed(() => ({
+  attachElement,
+  attachDirection: attachDirection.value
+}))
+</script>
+
+<template>
+  <select v-model="attachDirection" ref="attachElement">
+    <option value="-" disabled>-</option>
+    <option value="top">top</option>
+    <option value="bottom">bottom</option>
+    <option value="left">left</option>
+    <option value="right">right</option>
+  </select>
+  <br>
+  <range-calendar v-if="attachDirection !== '-'" :options="options" />
+</template>
+```
 
 ## 4. Fixed span
 
@@ -412,4 +420,4 @@ The modifier receive current `start` and `end`, and should return the preset ran
     :options="options"
   />
 </template>
-```
+``` -->
