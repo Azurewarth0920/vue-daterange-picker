@@ -26,6 +26,7 @@ const end = ref<string>('')
 const today = new Date()
 
 const options = defineCalendarOptions({
+  fixedSpan:3,
   presets: [
     {
       text: 'Last 7 days',

@@ -1,6 +1,7 @@
 import {
   computed,
   defineComponent,
+  nextTick,
   onMounted,
   PropType,
   reactive,
@@ -110,7 +111,9 @@ export default defineComponent({
         return props.end ? options.value.serializer(props.end).getTime() : null
       },
       set: (time: number | null) => {
+        // TODO: Fix this logic
         let orderedTime = time
+        console.log('time', start.value)
 
         if (
           typeof time === 'number' &&
@@ -352,7 +355,9 @@ export default defineComponent({
           options.value.weekSpan?.to ?? 6
         )
         start.value = lower
-        end.value = upper
+        nextTick(() => {
+          end.value = upper
+        })
         return
       }
 
@@ -364,7 +369,9 @@ export default defineComponent({
         )
 
         start.value = lower
-        end.value = upper
+        nextTick(() => {
+          end.value = upper
+        })
         return
       }
 
