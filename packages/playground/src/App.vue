@@ -1,20 +1,32 @@
 <template>
   <p>
-    Start: <input v-model="start" type="text" /> End:
-    <input v-model="end" type="text" />
+    Start: <input
+      v-model="start"
+      type="text"
+    > End:
+    <input
+      v-model="end"
+      type="text"
+    >
   </p>
-  <hr />
-  <range-calendar v-model:start="start" v-model:end="end" :options="options" />
+  <hr>
+  <range-calendar
+    v-model:start="start"
+    v-model:end="end"
+    :options="options"
+  />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Options } from '../src/types'
-const start = ref<Date | null>(null)
-const end = ref<Date | null>(null)
+import { defineCalendarOptions, RangeCalendar } from '@vue3-range-calendar/lib'
+import '@vue3-range-calendar/lib/index.css'
+const start = ref<string>('')
+const end = ref<string>('')
 const today = new Date()
 
-const options: Options = {
+const options = defineCalendarOptions({
+  fixedSpan:3,
   presets: [
     {
       text: 'Last 7 days',
@@ -35,5 +47,5 @@ const options: Options = {
       },
     },
   ],
-}
+})
 </script>

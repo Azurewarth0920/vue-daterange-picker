@@ -1,0 +1,16 @@
+{
+  "name": "playground",
+  "version": "0.3.3",
+  "scripts": {
+    "dev": "vite"
+  },
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.2.12",
+    "vue": "^3.4.26",
+    "@vue3-range-calendar/lib": "workspace:^",
+    "@vitejs/plugin-vue": "^5.0.4"
+  }
+}

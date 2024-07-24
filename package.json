@@ -2,9 +2,10 @@
   "name": "vue3-range-calendar",
   "version": "0.3.3",
   "description": "Calendar UI component library of Vue.js 3 for picking date, week, month, year ranges, with zero dependencies and high customizability.",
-  "main": "dist/index.esm.js",
-  "module": "dist/index.esm.js",
-  "unpkg": "dist/index.umd.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "packageManager": "pnpm@9.1.4",
+  "type": "module",
   "files": [
     "dist"
   ],
@@ -17,12 +18,17 @@
     "week range",
     "date range picker"
   ],
+  "engines": {
+    "node": ">=21.0.0"
+  },
   "scripts": {
-    "dev": "vite",
+    "dev": "turbo dev",
+    "dev:lib": "turbo dev --filter=./packages/lib",
+    "dev:playground": "turbo dev --filter=./playground",
+    "build": "turbo build --filter=./packages/lib",
+    "docs:dev": "turbo dev --filter=./docs",
+    "docs:build": "turbo build --filter=./docs",
     "test": "vitest",
-    "build": "rm -rf ./dist && yarn build:lib && yarn build:types",
-    "build:lib": "rollup -c rollup.config.js",
-    "build:types": "tsc src/types/index.ts --declaration --emitDeclarationOnly --outDir dist",
     "lint": "eslint --fix ./src/",
     "format": "prettier -w ./src/",
     "fix": "yarn format && yarn lint"
@@ -38,32 +44,19 @@
   },
   "homepage": "https://github.com/Azurewarth0920/vue3-range-calendar#readme",
   "devDependencies": {
-    "@babel/plugin-external-helpers": "^7.16.7",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-node-resolve": "^13.2.1",
-    "@rollup/plugin-replace": "^4.0.0",
-    "@rollup/plugin-typescript": "^8.3.2",
-    "@types/node": "^16.7.5",
-    "@typescript-eslint/eslint-plugin": "^5.23.0",
-    "@typescript-eslint/parser": "^5.23.0",
-    "@vitejs/plugin-vue": "^1.2.2",
-    "@vitejs/plugin-vue-jsx": "^1.1.7",
-    "@vue/babel-plugin-jsx": "^1.1.1",
-    "@vue/compiler-sfc": "^3.0.5",
-    "@vue/eslint-config-prettier": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "@vue/eslint-config-typescript": "^10.0.0",
-    "eslint": "^8.15.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-vue": "^8.7.1",
-    "prettier": "^2.6.2",
-    "rollup": "^2.71.1",
-    "rollup-plugin-scss": "^3.0.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "sass": "^1.49.9",
-    "tslib": "^2.4.0",
-    "typescript": "^4.1.3",
-    "vite": "^2.7.13",
-    "vitest": "^0.9.2",
-    "vue": "^3.2.29",
-    "vue-tsc": "^0.0.24"
+    "tslib": "^2.6.2",
+    "turbo": "^1.13.3",
+    "typescript": "^5.4.5"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   }
 }

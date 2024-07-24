@@ -22,14 +22,12 @@ export default defineComponent({
       required: true,
     },
     maxRange: {
-      type: Object as PropType<
-        | {
-            maxUpper: number | undefined
-            maxLower: number | undefined
-            minUpper: number | undefined
-            minLower: number | undefined
-          }
-        | undefined
+      type: Object as PropType<{
+          maxUpper?: number
+          maxLower?: number
+          minUpper?: number
+          minLower?: number
+        }
       >,
       default: () => ({}),
     },
@@ -140,8 +138,8 @@ export default defineComponent({
       )
     }
 
-    const isSpanCell = (payload: number): string[] | string | false => {
-      if (!hoveringPayload.value) return false
+    const isSpanCell = (payload: number): string[] | string => {
+      if (!hoveringPayload.value) return ''
       const { upper, lower } =
         props.type === 'week'
           ? calculateWeekSpan(hoveringPayload.value, props.weekOffset)
@@ -153,10 +151,10 @@ export default defineComponent({
             )
           : { upper: false, lower: false }
 
-      if (!upper || !lower) return false
+      if (typeof upper !== 'number' || typeof lower !== 'number') return ''
       if (upper === payload) return ['-span', '-span_upper']
       if (lower === payload) return ['-span', '-span_lower']
-      return upper > payload && lower < payload && '-span'
+      return upper > payload && lower < payload ? '-span' : ''
     }
 
     const isCellAvailable = (payload: number): boolean => {

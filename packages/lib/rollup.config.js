@@ -1,14 +1,8 @@
 import babel from '@rollup/plugin-babel'
 import typescript from '@rollup/plugin-typescript'
-import { terser } from 'rollup-plugin-terser'
-import pkg from './package.json'
-import scss from 'rollup-plugin-scss'
+import terser from '@rollup/plugin-terser'
+import pkg from '../../package.json' with { type: "json" };
 import resolve from '@rollup/plugin-node-resolve'
-import replace from '@rollup/plugin-replace'
-
-const globals = {
-  vue: 'Vue',
-}
 
 export default [
   {
@@ -21,11 +15,8 @@ export default [
         plugins: [terser()],
       },
     ],
+    external: ['vue'],
     plugins: [
-      scss({
-        output: 'dist/styles/index.css',
-        outputStyle: 'compressed',
-      }),
       typescript({
         sourceMap: true,
       }),
@@ -41,17 +32,14 @@ export default [
     output: [
       {
         name: 'rangeCalendar',
-        file: pkg.unpkg,
-        format: 'umd',
-        globals,
+        file: pkg.exports['.'].require,
+        format: 'cjs',
+        exports: 'named',
         plugins: [terser()],
       },
     ],
+    external: ['vue'],
     plugins: [
-      scss({
-        output: 'dist/styles/index.css',
-        outputStyle: 'compressed',
-      }),
       typescript({
         sourceMap: false,
       }),
@@ -59,10 +47,6 @@ export default [
         babelHelpers: 'bundled',
         extensions: ['.ts', '.tsx'],
         plugins: ['@vue/babel-plugin-jsx'],
-      }),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('production'),
-        preventAssignment: true,
       }),
       resolve(),
     ],
